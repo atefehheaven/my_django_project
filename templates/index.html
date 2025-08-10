@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog Posts</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'post_create' %}" style="display: block; text-align: right; margin-bottom: 20px; font-size: 1.2em;">Create New Post</a>
+        <h1>All Blog Posts</h1>
+
+        {% if posts %} {# بررسی میکنیم آیا لیستی از پست ها وجود دارد؟ #}
+            {% for post in posts %} {# روی هر پست در لیست تکرار میکنیم #}
+                <div class="post">
+                    <h2><a>{{ post.title }}</h2> {# عنوان پست رو نمایش میدیم #}
+                    <p><a href="{% url 'post_detail' post.id %}">{{ post.content }}</a></p> {# محتوای پست رو نمایش میدیم #}
+                    <small>Published on: {{ post.pub_date }}</small> {# تاریخ انتشار رو نمایش میدیم #}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No posts available yet. Please add some posts from the admin panel!</p>
+        {% endif %}
+    </div>
+</body>
+</html>

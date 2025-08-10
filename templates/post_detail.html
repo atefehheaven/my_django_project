@@ -1,0 +1,23 @@
+{% load static %} {# <--- این خط رو حتماً اضافه کن #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title> {# عنوان صفحه از عنوان پست گرفته میشه #}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> {# <--- این خط برای اتصال CSS هست #}
+    </head>
+<body>
+    <div class="container">
+        <div class="post-detail">
+            <a href="{% url 'post_edit' post.id %}" class="back-link">Edit Post</a>
+            <a href="{% url 'post_delete' post.id %}" class="back-link" style="background-color: #dc3545;">Delete Post</a><br>
+            <a href="{% url 'post_list' %}" class="back-link">Back to all posts</a>
+            <h2>{{ post.title }}</h2> {# عنوان پست رو نمایش میدیم #}
+            <small>Published on: {{ post.pub_date }}</small> {# تاریخ انتشار رو نمایش میدیم #}
+            <p>{{ post.content|linebreaksbr }}</p> {# محتوای پست رو نمایش میدیم و خط جدید رو به <br> تبدیل میکنیم #}
+        </div>
+        <a href="{% url 'post_list' %}" class="back-link">Back to all posts</a> {# لینک برگشت به صفحه لیست پست‌ها #}
+    </div>
+</body>
+</html>
